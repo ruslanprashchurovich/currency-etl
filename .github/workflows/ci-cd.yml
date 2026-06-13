@@ -33,7 +33,7 @@ jobs:
       - run: |
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
-      - run: pytest tests/ -v --cov=src
+      - run: python -m pytest tests/ -v --cov=src
 
   docker:
     runs-on: ubuntu-latest
