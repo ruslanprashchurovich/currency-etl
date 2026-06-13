@@ -40,10 +40,10 @@ if __name__ == "__main__":
     # Запустить сразу при старте
     run_pipeline()
 
-    # Потом каждый час
-    schedule.every().hour.do(run_pipeline)
+    # Потом каждую минуту
+    schedule.every(1).minutes.do(run_pipeline)
 
-    print("\n⏰ Планировщик запущен — обновление каждый час")
+    print("\n⏰ Планировщик запущен — обновление каждую минуту")
     while True:
         schedule.run_pending()
-        time.sleep(60)  # проверять каждую минуту
+        time.sleep(5)

@@ -73,7 +73,6 @@ def test_save_rates_inserts_data(mock_get_conn):
     mock_cursor.executemany.assert_called_once()
     sql, params = mock_cursor.executemany.call_args[0]
     assert "INSERT INTO currency_rates" in sql
-    assert "ON CONFLICT" in sql
     assert params == rates
     mock_conn.commit.assert_called_once()
     mock_cursor.close.assert_called_once()

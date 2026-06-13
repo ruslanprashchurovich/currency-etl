@@ -28,11 +28,8 @@ def init_db():
             name        VARCHAR(100),
             nominal     INTEGER,
             rate        NUMERIC(12, 4),
-            date        DATE NOT NULL,
-            loaded_at   TIMESTAMP DEFAULT NOW(),
-
-            -- Уникальность: одна запись на валюту в день
-            UNIQUE (char_code, date)
+            date        TIMESTAMP NOT NULL,
+            loaded_at   TIMESTAMP DEFAULT NOW()
         );
 
         CREATE INDEX IF NOT EXISTS idx_currency_date
@@ -54,16 +51,10 @@ def save_rates(rates: list[dict]):
     conn = get_connection()
     cursor = conn.cursor()
 
-    # INSERT ... ON CONFLICT — если запись уже есть (та же валюта + дата)
-    # обновить курс вместо ошибки
     cursor.executemany(
         """
         INSERT INTO currency_rates (char_code, name, nominal, rate, date)
-        VALUES (%(char_code)s, %(name)s, %(nominal)s, %(rate)s, %(date)s)
-        ON CONFLICT (char_code, date)
-        DO UPDATE SET
-            rate      = EXCLUDED.rate,
-            loaded_at = NOW();
+        VALUES (%(char_code)s, %(name)s, %(nominal)s, %(rate)s, %(date)s);
     """,
         rates,
     )
