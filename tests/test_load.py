@@ -3,7 +3,13 @@ from unittest.mock import patch, MagicMock
 from src.load import get_connection, init_db, save_rates
 
 
-@patch.dict(os.environ, {"DB_HOST": "db", "DB_PORT": "5432", "DB_NAME": "currency_db", "DB_USER": "admin", "DB_PASSWORD": "secret"})
+@patch.dict(os.environ, {
+    "DB_HOST": "db",
+    "DB_PORT": "5432",
+    "DB_NAME": "currency_db",
+    "DB_USER": "admin",
+    "DB_PASSWORD": "secret",
+})
 @patch("src.load.psycopg2.connect")
 def test_get_connection(mock_connect):
     get_connection()
