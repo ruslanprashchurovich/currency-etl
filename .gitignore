@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.notebook_checkpoints/
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+run.txt
+

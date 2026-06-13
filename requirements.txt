@@ -1,0 +1,4 @@
+requests
+psycopg2-binary
+schedule              # запуск по расписанию
+python-dotenv         # читать .env файл
